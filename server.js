@@ -13,7 +13,7 @@ http.createServer(function (req, res) {
     }
     var parsedUrl = url.parse(req.url, true);
     console.log(parsedUrl);
-    var sql = "SELECT ST_AsGeoJSON(ST_Transform(way, 4236), 7) AS geojson, name FROM planet_osm_polygon WHERE admin_level='8' AND ST_Intersects(way, ST_Transform(ST_SetSRID(ST_MakePoint($1, $2), 4326), 900913)) LIMIT 1";
+    var sql = "SELECT ST_AsGeoJSON(ST_Transform(way, 4326), 7) AS geojson, name FROM planet_osm_polygon WHERE admin_level='8' AND ST_Intersects(way, ST_Transform(ST_SetSRID(ST_MakePoint($1, $2), 4326), 900913)) LIMIT 1";
     var params = [
         parsedUrl.query.lon,
         parsedUrl.query.lat
